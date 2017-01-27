@@ -2,12 +2,9 @@
  * Created by gary on 27.01.17.
  */
 
-var source = data.slice(0);
-// console.log(source);
+var source = data.slice(0, 200);
 
 var myData = [].fill.call({ length: 128 }, 0);
-
-
 source.forEach(function (channels) {
 
     [].slice.call(channels).forEach(function (el, idx) {
@@ -17,25 +14,13 @@ source.forEach(function (channels) {
 });
 
 
-// var orig = [22.81, 23.09, 22.91, 23.23, 22.83, 23.05, 23.02, 23.29, 23.41, 23.49, 24.60, 24.63, 24.51, 23.73, 23.31, 23.53, 23.06, 23.25, 23.12, 22.80, 22.84];
-// var origEMA = [22.81, 22.87, 22.87, 22.95, 22.92, 22.95, 22.96, 23.03, 23.10, 23.18, 23.47, 23.70, 23.86, 23.83, 23.73, 23.69, 23.56, 23.50, 23.42, 23.30, 23.21];
+var width = 10;
 
-// var orig = [5.3, 6.7, 7.9, 7.1, 5.2, 4.1, 3.5, 5.4, 7.3, 9.4, 8.0, 6.6, 7.9, 9.2, 7.6];
-
-var width = 20;
-
-
-
-//
 ema = getEma(myData, width);
 
 
 console.log('data', myData);
 console.log('ema:', ema);
-
-
-
-// console.log('ema', );
 
 
 
@@ -83,28 +68,6 @@ var myChart = new Chart(ctx, {
         }
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
