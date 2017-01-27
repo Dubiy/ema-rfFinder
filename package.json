@@ -1,0 +1,10 @@
+{
+  "name": "ema",
+  "version": "1.0.0",
+  "description": "ema rfFinder",
+  "author": "Igor Dubiy",
+  "license": "ISC",
+  "dependencies": {
+    "chart.js": "^2.4.0"
+  }
+}
