@@ -2,7 +2,8 @@
  * Created by gary on 27.01.17.
  */
 
-var source = data.slice(0, 200);
+// var source = data.slice(0, 200);
+var source = data.slice(0);
 
 var myData = [].fill.call({ length: 128 }, 0);
 source.forEach(function (channels) {
@@ -12,6 +13,10 @@ source.forEach(function (channels) {
     });
 
 });
+
+myData = [].reverse.call(myData);
+
+console.dir(myData);
 
 
 var width = 10;
@@ -44,11 +49,19 @@ var myChart = new Chart(ctx, {
             },
             {
                 label: 'ema',
-                data: new Array(width).concat(ema),
+                data: ema[0],
                 borderWidth: 1,
                 borderColor: 'green',
                 backgroundColor: 'rgba(0,0,0,0)'
-            }]
+            },
+            {
+                label: 'ema2',
+                data: ema[1],
+                borderWidth: 1,
+                borderColor: 'blue',
+                backgroundColor: 'rgba(0,0,0,0)'
+            }
+            ]
     },
 
     options: {
@@ -74,6 +87,7 @@ var myChart = new Chart(ctx, {
 
 function getEma(data, width) {
     var ema = [],
+        ema2 = [],
         a = 2 / (width + 1),
         sma = 0,
         i;
@@ -81,9 +95,28 @@ function getEma(data, width) {
     for (i = 0; i < width; i++) {
         sma += data[i] / width;
     }
-    ema.push(sma);
+    for (i = 0; i < width; i++) {
+        ema.push(sma);
+    }
     for (i = width; i < data.length; i++) {
         ema.push(a*data[i] + (1 - a) * ema[ema.length - 1]);
     }
-    return ema;
+
+
+    sma = 0;
+    for (i = data.length - 1; i > data.length - width; i--) {
+        sma += data[i] / width;
+    }
+    for (i = data.length - 1; i > data.length - width; i--) {
+        ema2.unshift(sma);
+    }
+    for (i = data.length - width; i >= 0; i--) {
+        ema2.unshift(a*data[i] + (1 - a) * ema2[ema2.length - 1]);
+    }
+
+
+
+
+
+    return [ema, ema2];
 }
